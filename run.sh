@@ -12,4 +12,6 @@ for VAR in `env`; do
     fi
 done
 
-exec /usr/bin/minidlna -d $@
+for x in `ls /sys/class/net`; do if [[ $x == wlp* ]]; then ifaces+="-i $x "; fi; done
+
+exec /usr/sbin/minidlnad -d $ifaces $@
